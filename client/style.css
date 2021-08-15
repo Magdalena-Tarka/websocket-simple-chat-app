@@ -78,6 +78,11 @@ p {
   align-items: flex-end;
 }
 
+.message--chat-bot {
+  transform: scale(0.8);
+  font-style: italic;
+};
+
 .message--received {
     animation: fadeIn;
     animation-duration: 3s;
@@ -102,6 +107,16 @@ p {
 
 .message--self .message__content {
   background: #3498db;
+}
+
+.message--chat-bot .message__content {
+  background: #282c34;
+  align-self: center;
+}
+
+.message--chat-bot .message__author {
+  align-self: center;
+  margin-bottom: 0;
 }
 
 .show {

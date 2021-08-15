@@ -12,6 +12,7 @@ const addMessage = (author, content) => {
   message.classList.add('message');
   message.classList.add('message--received');
   if(author === userName) message.classList.add('message--self');
+  if(author === 'Chat Bot') message.classList.add('message--chat-bot');
   message.innerHTML = `
     <h3 class="message__author">${userName === author ? 'You' : author }</h3>
     <div class="message__content">
@@ -24,6 +25,8 @@ const addMessage = (author, content) => {
 const socket = io();
 
 socket.on('message', ({ author, content }) => addMessage(author, content));
+socket.on('newUser', ({ author, content }) => addMessage(author, content));
+socket.on('removeUser', ({ author, content }) => addMessage(author, content));
 
 const login = (e) => {
   e.preventDefault();
@@ -33,6 +36,7 @@ const login = (e) => {
     userName = userNameInput.value;
     loginForm.classList.toggle('show');
     messagesSection.classList.toggle('show');
+    socket.emit('join', userName);
   };
 }
 
